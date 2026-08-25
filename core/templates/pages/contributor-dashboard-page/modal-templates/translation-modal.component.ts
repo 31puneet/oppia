@@ -96,6 +96,7 @@ export interface TranslationOpportunity {
   reviewerOnlyContentCount: number;
   userIsReviewer?: boolean;
   entityType: string;
+  translationMissingReasons?: string[];
 }
 export interface ModifyTranslationOpportunity {
   id: string;
@@ -130,6 +131,7 @@ export class TranslationModalComponent {
   activeDataFormat!: string;
   activeWrittenTranslation: string | string[] = '';
   activeContentType!: string;
+  activeTranslationStatus?: string;
   activeRuleDescription!: string;
   uploadingTranslation: boolean = false;
   subheading!: string;
@@ -421,6 +423,7 @@ export class TranslationModalComponent {
       more: this.moreAvailable,
       status: this.activeStatus,
       translation: this.activeWrittenTranslation,
+      translationStatus: this.activeTranslationStatus,
     } = translatableItem);
     this.activeDataFormat = translatableItem.dataFormat || '';
     const {contentType, ruleType, interactionId} = translatableItem;
