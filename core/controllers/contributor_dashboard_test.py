@@ -3060,6 +3060,7 @@ class ContributionOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         response = self.get_json(
@@ -3159,6 +3160,7 @@ class ReviewableOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         # The signup() helper temporarily logs in as the newly created user;
@@ -3272,6 +3274,7 @@ class ReviewableOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         self.login(self.CURRICULUM_ADMIN_EMAIL)
@@ -3376,6 +3379,7 @@ class ReviewableOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         self.login(self.CURRICULUM_ADMIN_EMAIL)
@@ -3455,6 +3459,7 @@ class ReviewableOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         self.login(self.CURRICULUM_ADMIN_EMAIL)
@@ -3510,6 +3515,7 @@ class ReviewableOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         # A skill with a reviewable translation suggestion of its own, so the
@@ -3541,6 +3547,7 @@ class ReviewableOpportunitiesHandlerV2Test(test_utils.GenericTestBase):
             content_count=2,
             incomplete_translation_language_codes=['hi'],
             translation_counts={},
+            translation_missing_reasons={},
         ).put()
 
         self.login(self.CURRICULUM_ADMIN_EMAIL)
