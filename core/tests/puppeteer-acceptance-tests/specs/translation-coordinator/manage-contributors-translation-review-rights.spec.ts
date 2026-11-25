@@ -176,6 +176,12 @@ describe('Translation Coordinator', function () {
 
     // Add translation rights.
     await translationCoordinator.clickOnAddReviewerOrSubmitterButton();
+
+    // Verify that entering a nonexistent username shows an error.
+    await translationCoordinator.expectInvalidUsernameErrorOnAddRights(
+      'nonExistentUser123'
+    );
+
     await translationCoordinator.addUsernameInUsernameInputModal(
       'translationReviewer1'
     );
@@ -190,6 +196,12 @@ describe('Translation Coordinator', function () {
       'hi',
       'हिन्दी (Hindi)'
     );
+
+    // Verify that Hindi is no longer available in the add-language dropdown.
+    await translationCoordinator.expectLanguageNotPresentInAddLanguageDropdown(
+      'Hindi'
+    );
+
     await translationCoordinator.closeLanguageSelectorModal();
     await translationCoordinator.page.reload();
     await translationCoordinator.switchToTabInContributorAdminPage(

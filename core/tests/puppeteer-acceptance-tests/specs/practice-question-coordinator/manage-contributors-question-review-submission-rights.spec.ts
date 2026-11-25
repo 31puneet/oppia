@@ -95,6 +95,12 @@ describe('Practice Question Coordinator', function () {
 
     // Add question reviewer rights.
     await questionCoordinator.clickOnAddReviewerOrSubmitterButton();
+
+    // Verify that entering a nonexistent username shows an error.
+    await questionCoordinator.expectInvalidUsernameErrorOnAddRights(
+      'nonExistentUser123'
+    );
+
     await questionCoordinator.addUsernameInUsernameInputModal(
       questionReviewer.username ?? ''
     );
@@ -110,6 +116,12 @@ describe('Practice Question Coordinator', function () {
   it('should be able to add question submitter rights for a user', async function () {
     // Add question submitter rights.
     await questionCoordinator.clickOnAddReviewerOrSubmitterButton();
+
+    // Verify that entering a nonexistent username shows an error.
+    await questionCoordinator.expectInvalidUsernameErrorOnAddRights(
+      'nonExistentUser123'
+    );
+
     await questionCoordinator.addUsernameInUsernameInputModal(
       questionSubmitter.username ?? ''
     );
@@ -155,6 +167,13 @@ describe('Practice Question Coordinator', function () {
     await questionCoordinator.addUsernameInUsernameInputModal(
       questionSubmitter.username ?? ''
     );
+
+    // Verify the submitter checkbox is pre-checked before removal.
+    await questionCoordinator.expectQuestionRoleCheckboxToBeChecked(
+      'Submitter',
+      true
+    );
+
     await questionCoordinator.expectScreenshotToMatch(
       'editQuestionRightsModalWithSubmitterChecked',
       __dirname
@@ -172,6 +191,13 @@ describe('Practice Question Coordinator', function () {
     await questionCoordinator.addUsernameInUsernameInputModal(
       questionReviewer.username ?? ''
     );
+
+    // Verify the reviewer checkbox is pre-checked before removal.
+    await questionCoordinator.expectQuestionRoleCheckboxToBeChecked(
+      'Reviewer',
+      true
+    );
+
     await questionCoordinator.expectScreenshotToMatch(
       'editQuestionRightsModalWithReviewerChecked',
       __dirname

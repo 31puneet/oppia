@@ -123,6 +123,41 @@ export class ContributorAdmin extends BaseUser {
   }
 
   /**
+   * Attempts to add a nonexistent username and verifies that the error banner
+   * is shown, the input field is cleared, and the modal remains open.
+   * @param invalidUsername - The nonexistent username to enter.
+   */
+  async expectInvalidUsernameErrorOnAddRights(
+    invalidUsername: string
+  ): Promise<void> {
+    const usernameInputSelector = `${commonModalContainerSelector} input`;
+    const errorBannerSelector = `${commonModalContainerSelector} .alert.alert-danger`;
+
+    await this.expectElementToBeVisible(commonModalContainerSelector);
+    await this.typeInInputField(usernameInputSelector, invalidUsername);
+    await this.clickOnElementWithSelector(addRightsButtonSelector);
+
+    await this.expectElementToBeVisible(errorBannerSelector);
+    await this.expectTextContentToContain(
+      errorBannerSelector,
+      'Username not found. Please enter a valid username.'
+    );
+
+    // Verify the input field is cleared after the error.
+    await this.page.waitForFunction(
+      (selector: string) => {
+        const input = document.querySelector(selector) as HTMLInputElement;
+        return input !== null && input.value === '';
+      },
+      {},
+      usernameInputSelector
+    );
+
+    // Verify the modal remains open.
+    await this.expectElementToBeVisible(commonModalContainerSelector);
+  }
+
+  /**
    * Checks if the number of contributors is as expected.
    * @param {number} number - The expected number of contributors.
    */

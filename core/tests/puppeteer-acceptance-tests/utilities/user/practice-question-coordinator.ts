@@ -90,6 +90,23 @@ export class QuestionCoordinator extends BaseUser {
   }
 
   /**
+   * Verifies that the question role checkbox is in the expected state.
+   * @param right - The right whose checkbox to check.
+   * @param isChecked - Whether the checkbox is expected to be checked.
+   */
+  async expectQuestionRoleCheckboxToBeChecked(
+    right: 'Submitter' | 'Reviewer',
+    isChecked: boolean = true
+  ): Promise<void> {
+    const roleCheckboxSelector = `.e2e-test-question-${right.toLowerCase()}-checkbox`;
+    const expectedStateSelector = isChecked
+      ? `${roleCheckboxSelector}${checkedCheckboxSelector}`
+      : `${roleCheckboxSelector}${uncheckedCheckboxSelector}`;
+
+    await this.expectElementToBeVisible(expectedStateSelector);
+  }
+
+  /**
    * Checks if the total number of question reviewers is as expected.
    * @param {number} number - The expected number of question reviewers.
    */

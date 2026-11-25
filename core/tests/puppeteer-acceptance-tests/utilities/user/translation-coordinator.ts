@@ -81,6 +81,31 @@ export class TranslationCoordinator extends BaseUser {
   }
 
   /**
+   * Verifies that a language is not present in the add-language dropdown.
+   * @param language - The language that should not appear in the dropdown.
+   */
+  async expectLanguageNotPresentInAddLanguageDropdown(
+    language: string
+  ): Promise<void> {
+    await this.expectElementToBeVisible(languageSelectorModalSelector);
+    await this.page.waitForFunction(
+      (selector: string, lang: string) => {
+        const selectElement = document.querySelector(
+          `${selector} select`
+        ) as HTMLSelectElement;
+        if (!selectElement) {
+          return false;
+        }
+        const options = Array.from(selectElement.options);
+        return !options.some(option => option.text.includes(lang));
+      },
+      {},
+      languageSelectorModalSelector,
+      language
+    );
+  }
+
+  /**
    * Closes the language selector modal.
    */
   async closeLanguageSelectorModal(): Promise<void> {
